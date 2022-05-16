@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>포켓몬 도감</title>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/normalize.css">
+</head>
+<body>
+    <article id="app">
+        <ul class="list-item">
+            <!-- 더 많은 캐러셀 삽입이 가능하도록 JavaScript로 이동 -->
+            <!-- <li><img src="images/꼬부기.png" alt="꼬부기"></li>
+            <li><img src="images/어니부기.png" alt="어니부기"></li>
+            <li><img src="images/거북왕.png" alt="거북왕"></li>
+            <li><img src="images/메가거북왕.png" alt="메가거북왕"></li>
+            <li><img src="images/푸린.png" alt="푸린"></li>
+            <li><img src="images/푸크린.png" alt="푸크린"></li>
+            <li><img src="images/고라파덕.png" alt="고라파덕"></li> -->
+        </ul>
+    </article>
+    <script>
+        // (querySelector) CSS 선택자, ul 단일 요소에 접근하기
+        const center = document.querySelector('.list-item');
+
+        // 사진배열 선언하기
+        const arrPic = [
+        "images/꼬부기.png",
+        "images/어니부기.png",
+        "images/거북왕.png",
+        "images/메가거북왕.png",
+        "images/푸린.png",
+        "images/푸크린.png",
+        "images/고라파덕.png",
+        ];
+
+        // 사진배열에 li 만들기
+        arrPic.forEach(item => {
+            // ① 문서에 HTML요소, li태그를 생성하겠다
+            const elLi = document.createElement('li');
+
+            // ② elLi 내부에 img태그 추가
+            elLi.innerHTML = `<img src=${item} alt=''>`;
+
+            // ③ ul에 실제로 li를 추가하겠다
+            // ①만 하면 추가가 안되고 append나 appendChild를 해줘야 실제로 추가된다
+            center.appendChild(elLi);
+        })
+
+        // ul의 li를 items로 선언하기
+        const items = center.querySelectorAll('li');
+
+        // 반지름 선언 : (0번째 li의 너비) * (li의 문자열 길이) / 3.14 / 2
+        // 원의 반지름 = (원의 둘레 / 3.14) / 2
+        const radius = items[0].offsetWidth * items.length / 3.14 / 2;
+
+
+
+    </script>
+</body>
+</html>
