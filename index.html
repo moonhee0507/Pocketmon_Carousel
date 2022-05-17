@@ -9,9 +9,10 @@
     <link rel="stylesheet" href="style/normalize.css">
 </head>
 <body>
+    <h1>가장 귀여운 포켓몬은?</h1>
     <article id="app">
         <ul class="list-item">
-            <!-- 더 많은 캐러셀 삽입이 가능하도록 JavaScript로 이동 -->
+            <!-- 더 많은 캐러셀 삽입이 가능하도록 Script로 이동 -->
             <!-- <li><img src="images/꼬부기.png" alt="꼬부기"></li>
             <li><img src="images/어니부기.png" alt="어니부기"></li>
             <li><img src="images/거북왕.png" alt="거북왕"></li>
@@ -36,7 +37,7 @@
         "images/고라파덕.png",
         ];
 
-        // 사진배열에 li 만들기
+        // 사진배열을 li태그로 만들기
         arrPic.forEach(item => {
             // ① 문서에 HTML요소, li태그를 생성하겠다
             const elLi = document.createElement('li');
@@ -45,7 +46,7 @@
             elLi.innerHTML = `<img src=${item} alt=''>`;
 
             // ③ ul에 실제로 li를 추가하겠다
-            // ①만 하면 추가가 안되고 append나 appendChild를 해줘야 실제로 추가된다
+            // ①만 하면 추가가 안되고 append나 appendChild를 해줘야 실제로 추가된다(?)
             center.appendChild(elLi);
         })
 
@@ -55,9 +56,29 @@
         // 반지름 선언 : (0번째 li의 너비) * (li의 문자열 길이) / 3.14 / 2
         // 원의 반지름 = (원의 둘레 / 3.14) / 2
         const radius = items[0].offsetWidth * items.length / 3.14 / 2;
+        
+        // li가 0번째이면 Y축으로 0도 회전하고 Z축을 따라 radius만큼 요소 위치를 변경한다
+        // li가 0번째가 아니면 Y축으로 (360 / items.length * index)만큼 회전하고 Z축을 따라 radius만큼 요소 위치를 변경한다
+        items.forEach((item, index) => {
+            if (index === 0) {
+                item.style.transform = `rotateY(0) translateZ(${radius}px)`
+            } else {
+                item.style.transform = `rotateY(${360 / items.length * index}deg) translateZ(${radius}px)`
+            }
+        });
 
+        // 각도 선언
+        const angle = 360 / items.length;
+        let currAngle = 0;
 
-
+        document.addEventListener('click', (event) => {
+            if (window.innerWidth / 2 < event.clientX) {
+                currAngle -= angle;
+            } else {
+                currAngle += angle;
+            }
+            center.style.transform = `translate(-50%, -50%) rotateY(${currAngle}deg)`;
+        });
     </script>
 </body>
 </html>
